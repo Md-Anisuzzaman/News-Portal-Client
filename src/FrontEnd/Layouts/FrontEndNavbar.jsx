@@ -1,22 +1,25 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import styles from './FrontEnd.module.css';
 
 const FrontEndNavbar = () => {
-  return (
-    <div className='border'>
-        <ul className='d-flex gap-3'>
-            <li>
-                <Link to="/">Home</Link>
-            </li>
-            <li>
-                <Link to="/about">About</Link>
-            </li>
-            <li>
-                <Link to="/contact">Contact</Link>
-            </li>
-        </ul>
-    </div>
-  )
+    return (
+        <div className={styles.main__body}>
+            <nav className={styles.nav__body}>
+                <ul className={styles.ul__body}>
+                    <li><Link className={styles.link__style}>Home</Link></li>
+                    <li><Link className={styles.link__style}>Internatioanal</Link></li>
+                    <li><Link className={styles.link__style} >Country</Link></li>
+                    <li><Link className={styles.link__style} >Sports</Link></li>
+                    <li><Link className={styles.link__style} >Culture</Link></li>
+                    <li><Link className={styles.link__style}>Politics</Link></li>
+                    <li><Link className={styles.link__style} to="/about" >About</Link></li>
+                    <li><Link className={styles.link__style} to="/contact"  >Contact</Link></li>
+                    <li><Link className={styles.link__style} to="/dashboard" >Dashboard</Link></li>
+                </ul>
+            </nav>
+        </div>
+    );
 }
 
 export default FrontEndNavbar

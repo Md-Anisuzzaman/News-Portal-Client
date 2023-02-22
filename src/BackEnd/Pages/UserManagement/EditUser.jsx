@@ -8,11 +8,11 @@ const EditUser = () => {
           <div className="card-body">
             <div class="register-content">
               <form action="" className='w-75 m-auto' method="POST" >
-                <h1 class="text-center">Add User</h1>
+                <h1 class="text-center">Update User</h1>
                 <div class="mb-3">
                   <label class="form-label">Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control form-control-lg bg-white bg-opacity-5"
-                    placeholder="e.g John Smith"  />
+                    placeholder="e.g John Smith" />
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Email Address <span class="text-danger">*</span></label>

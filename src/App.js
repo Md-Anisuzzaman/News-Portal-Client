@@ -3,6 +3,9 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import BackEndLayout from './BackEnd/Layouts/BackEndLayout';
 import BackEndHome from './BackEnd/Pages/BackEndHome';
 import { BackEndMessageAllMessage } from './BackEnd/Pages/Message/BackendPageList';
+import CreateNews from './BackEnd/Pages/NewsManagement/CreateNews';
+import EditNews from './BackEnd/Pages/NewsManagement/EditNews';
+import NewsLayout from './BackEnd/Pages/NewsManagement/NewsLayout';
 import AllUsers from './BackEnd/Pages/UserManagement/AllUsers';
 import CreateUser from './BackEnd/Pages/UserManagement/CreateUser';
 import EditUser from './BackEnd/Pages/UserManagement/EditUser';
@@ -18,8 +21,8 @@ function App() {
       <Routes>
         <Route path='' element={<FrontEndLayout />} >
           <Route index element={<FrontEndIndex />}></Route>
-          <Route path='/about' element={<FrontEndAbout />}></Route>
-          <Route path='/contact' element={<FrontEndContact />}></Route>
+          <Route path='about' element={<FrontEndAbout />}></Route>
+          <Route path='contact' element={<FrontEndContact />}></Route>
         </Route>
 
         <Route path='dashboard' element={<BackEndLayout />} >
@@ -30,6 +33,10 @@ function App() {
             <Route path="allusers" element={<AllUsers />} />
             <Route path="adduser" element={<CreateUser />} />
             <Route path="edituser" element={<EditUser />} />
+          </Route>
+          <Route path='news' element={<NewsLayout />}>
+            <Route path="addnews" element={<CreateNews />} />
+            <Route path="editnews" element={<EditNews />} />
           </Route>
 
         </Route>

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getUsers } from './userApi';
+import { getUsers,postUser } from './userApi';
 
 const initialState = {
     users: [],
@@ -13,7 +13,15 @@ export const fetchUsers = createAsyncThunk('user/fetchUsers', async () => {
         const users = await getUsers();
         return users;
     } catch (error) {
-        console.log("kno error --> ",error.message);
+        console.log("kno error --> ", error.message);
+    }
+});
+export const createUser = createAsyncThunk('user/createUser', async (formData) => {
+    try {
+        const users = await postUser(formData);
+        return users;
+    } catch (error) {
+        console.log("kno error --> ", error.message);
     }
 });
 
@@ -36,6 +44,10 @@ const userSlice = createSlice({
             state.users = [];
             state.isError = true
             state.error = action.error?.message
+        });
+        builder.addCase(createUser.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.users = action.payload;
         });
     },
 

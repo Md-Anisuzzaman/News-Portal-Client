@@ -1,0 +1,26 @@
+.main__body{
+background-color: aliceblue;
+}
+.nav__body{
+    display: flex;
+    justify-content: center;
+}
+
+.ul__body{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    gap: 50px;
+    margin-top: 10px;
+}
+
+.ul__body li{
+    list-style: none;
+}
+
+.link__style{
+    color: black;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+}

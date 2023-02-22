@@ -90,6 +90,16 @@ const BackendSideBar = () => {
                             </a>
                             <div className="menu-submenu">
                                 <div className="menu-item">
+                                    <Link to="/dashboard/news/addnews" className="menu-link">
+                                        <span className="menu-text">Create News</span>
+                                    </Link>
+                                </div>
+                                <div className="menu-item">
+                                    <Link to="/dashboard/news/editnews" className="menu-link">
+                                        <span className="menu-text">Edit News</span>
+                                    </Link>
+                                </div>
+                                <div className="menu-item">
                                     <a href="email_inbox.html" className="menu-link">
                                         <span className="menu-text">News Category</span>
                                     </a>
@@ -129,12 +139,12 @@ const BackendSideBar = () => {
                                     </Link>
                                 </div>
                                 <div className="menu-item">
-                                    <Link to="/dashboard/user/adduser"  className="menu-link">
+                                    <Link to="/dashboard/user/adduser" className="menu-link">
                                         <span className="menu-text">Create User</span>
                                     </Link>
                                 </div>
                                 <div className="menu-item">
-                                    <Link to="/dashboard/user/edituser"  className="menu-link">
+                                    <Link to="/dashboard/user/edituser" className="menu-link">
                                         <span className="menu-text">Edit User</span>
                                     </Link>
                                 </div>

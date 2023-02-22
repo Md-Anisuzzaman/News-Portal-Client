@@ -2,7 +2,7 @@ import React from 'react';
 
 const FrontEndFooter = () => {
     return (
-        <div className='border p-5'>
+        <div className='border p-5 mt-2'>
             <h1>FrontEnd Footer</h1>
         </div>
     );
