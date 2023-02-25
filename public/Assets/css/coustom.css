@@ -1,0 +1,21 @@
+:root {
+    --black: black;
+    --white: #ffffff;
+}
+
+.text__color {
+    color: var(--black);
+}
+
+.bg__color{
+    background-color: var(--white);
+}
+.footer__text__color{
+color: white;
+}
+ .footer__bg{
+    background-color: black;
+ }
+.text__size{
+    font-size: 16px;
+}

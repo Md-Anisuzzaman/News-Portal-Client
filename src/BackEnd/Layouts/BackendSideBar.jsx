@@ -143,11 +143,6 @@ const BackendSideBar = () => {
                                         <span className="menu-text">Create User</span>
                                     </Link>
                                 </div>
-                                <div className="menu-item">
-                                    <Link to="/dashboard/user/edituser" className="menu-link">
-                                        <span className="menu-text">Edit User</span>
-                                    </Link>
-                                </div>
                             </div>
                         </div>
                         <div className="menu-item">

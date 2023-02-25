@@ -14,6 +14,39 @@ import FrontEndIndex from './FrontEnd/FrontEndIndex';
 import FrontEndLayout from './FrontEnd/Layouts/FrontEndLayout';
 import { FrontEndAbout, FrontEndContact } from './FrontEnd/Pages/FrontEndPagesLists';
 
+let UserManagement = {
+  state: {
+    users: [],
+    user: {},
+  },
+
+  setters: {
+    set_users(){
+      this.state.users = [{name: 'John'},{name: 'wick'}]
+    },
+    set_user: function(user){
+      this.state.user = user;
+    }
+  },
+
+  getters: {
+    get_users: function(){
+      return {...this.state}.users;
+    },
+    get_user: function(){
+      return {...this.state.user};
+    },
+  }
+
+};
+
+
+UserManagement.setters.set_users.bind(UserManagement)();
+UserManagement.setters.set_user.bind(UserManagement)(UserManagement.state.users[1]);
+
+let data = UserManagement.getters.get_user.bind(UserManagement)();
+data.name = 'ethian'
+
 function App() {
   return (
 
@@ -32,7 +65,7 @@ function App() {
           <Route path='user' element={<UsersLayout />}>
             <Route path="allusers" element={<AllUsers />} />
             <Route path="adduser" element={<CreateUser />} />
-            <Route path="edituser" element={<EditUser />} />
+            <Route path="edituser/:id/:username" element={<EditUser />} />
           </Route>
           <Route path='news' element={<NewsLayout />}>
             <Route path="addnews" element={<CreateNews />} />

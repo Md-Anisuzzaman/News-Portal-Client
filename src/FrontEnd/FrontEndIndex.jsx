@@ -1,9 +1,11 @@
 import React from 'react';
+import Content from './Pages/Content';
+
 
 const FrontEndIndex = () => {
     return (
         <div>
-            <h1>from home</h1>
+            <Content/>
         </div>
     );
 };

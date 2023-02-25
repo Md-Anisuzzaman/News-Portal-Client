@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from '../../../Features/User/userSlice';
+import { asyncFetchUsers } from '../../../Features/User/asyncReducers/fetchUsers';
+import { Link } from 'react-router-dom';
 
 const AllUsers = () => {
-  const {users}  = useSelector((state) => state.users);
-  // console.log(users[0]);
-
   const dispatch = useDispatch();
+  const users = useSelector((state) => state.UserStore.users);
 
   useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch])
+    dispatch(asyncFetchUsers());
+  },[])
 
   return (
     <div className='container'>
@@ -40,6 +39,7 @@ const AllUsers = () => {
                       <td>{user.email}</td>
                       <td>
                         <button className='btn btn-outline-info me-2'>Set Role</button>
+                        <Link to={`/dashboard/user/edituser/${user._id}/${encodeURI(user.username.replaceAll(' ', '-'))}`}><button className='btn btn-outline-success me-2'>Edit User</button></Link>
                         <button className='btn btn-outline-danger'>Delete</button>
                       </td>
                     </tr>

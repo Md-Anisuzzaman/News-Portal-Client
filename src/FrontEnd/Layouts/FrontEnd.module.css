@@ -1,5 +1,6 @@
 .main__body{
 background-color: aliceblue;
+margin-top: -52px;
 }
 .nav__body{
     display: flex;

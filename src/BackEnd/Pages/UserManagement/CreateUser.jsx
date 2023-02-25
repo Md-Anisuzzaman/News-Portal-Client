@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { createUser } from '../../../Features/User/userSlice';
+import { asyncCreateUser } from '../../../Features/User/asyncReducers/createUser';
+
+
 
 const CreateUser = () => {
 
@@ -9,10 +11,10 @@ const CreateUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
     const formData = new FormData(e.currentTarget)
-    dispatch(createUser(formData))
-    console.log(formData);
+    dispatch(asyncCreateUser(formData))
+    e.currentTarget.reset();
+    console.log(e.currentTarget);
   }
 
 
@@ -22,10 +24,11 @@ const CreateUser = () => {
     let index = 1;
     for (const file of files) {
       temp_images.push(
-        <img className='w-25 me-3' key={index++}  src={window.URL.createObjectURL(file)} alt="" />
+        <img className='w-25 me-3' key={index++} src={window.URL.createObjectURL(file)} alt="" />
       )
       setpreviewImage(temp_images)
     }
+    setpreviewImage('');
   }
 
   return (
@@ -90,7 +93,6 @@ const CreateUser = () => {
                 <input onChange={imageHandler} type="file" name='image[]' multiple className="form-control form-control-lg bg-white bg-opacity-5" />
                 {previewImage}
               </div>
-
               <div className="mb-3">
                 <button type="submit" className="btn btn-outline-theme btn-lg d-block w-100">Submit</button>
               </div>
