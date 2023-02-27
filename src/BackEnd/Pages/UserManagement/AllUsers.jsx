@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncFetchUsers } from '../../../Features/User/asyncReducers/fetchUsers';
 import { Link } from 'react-router-dom';
+import { asyncDeleteUser } from '../../../Features/User/asyncReducers/deleteUser';
 
 const AllUsers = () => {
   const dispatch = useDispatch();
@@ -9,7 +10,22 @@ const AllUsers = () => {
 
   useEffect(() => {
     dispatch(asyncFetchUsers());
-  },[])
+  }, [])
+
+
+  // const handleDelete = async (id) => {
+  //   if (window.confirm("Confirm Delete")) {
+  //     await dispatch(deleteProduct(id));
+  //     dispatch(getproducts());
+  //   }
+  // };
+
+  const hndleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete")) {
+      await dispatch(asyncDeleteUser(id));
+      await dispatch(asyncFetchUsers(id));
+    }
+  };
 
   return (
     <div className='container'>
@@ -25,6 +41,7 @@ const AllUsers = () => {
                   <th scope="col">ID</th>
                   <th scope="col">Created At</th>
                   <th scope="col">Name</th>
+                  <th scope="col">Role</th>
                   <th scope="col">Email</th>
                   <th scope="col">Action</th>
                 </tr>
@@ -36,11 +53,12 @@ const AllUsers = () => {
                       <td>{user._id}</td>
                       <td>{user.user_created_at}</td>
                       <td>{user.username}</td>
+                      <td>{user.role}</td>
                       <td>{user.email}</td>
                       <td>
-                        <button className='btn btn-outline-info me-2'>Set Role</button>
+                        <Link to={`/dashboard/user/setrole/${user._id}/${encodeURI(user.username.replaceAll(' ', '-'))}`} className='btn btn-outline-info me-2'>Set Role</Link>
                         <Link to={`/dashboard/user/edituser/${user._id}/${encodeURI(user.username.replaceAll(' ', '-'))}`}><button className='btn btn-outline-success me-2'>Edit User</button></Link>
-                        <button className='btn btn-outline-danger'>Delete</button>
+                        <button onClick={() => hndleDelete(user._id)} className='btn btn-outline-danger'>Delete</button>
                       </td>
                     </tr>
                   ))}

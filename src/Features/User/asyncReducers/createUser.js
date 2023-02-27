@@ -1,12 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createUserApi } from "../userApi";
+import axiosInstance from "../../../utils/axios";
+
+export const createUserApi = async (formData) => {
+    const res = await axiosInstance.post('/adduser', formData)
+    return res.data;
+}
 
 export const asyncCreateUser = createAsyncThunk('user/createUser', async (formData) => {
     try {
-        const users = await createUserApi(formData);
-        return users;
+        const user = await createUserApi(formData);
+        return user;
     } catch (error) {
-        console.log("kno error --> ", error.message);
+        console.log("kno error--> ", error.message);
     }
 });
 

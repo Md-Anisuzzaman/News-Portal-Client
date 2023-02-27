@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { asyncFetchUser } from '../../../Features/User/asyncReducers/fetchUser';
 import { asyncUpdateUser } from '../../../Features/User/asyncReducers/updateUser';
+import { baseurl } from '../../../utils/axios';
 
 
 
@@ -35,7 +36,6 @@ const EditUser = () => {
             )
             setpreviewImage(temp_images)
         }
-        setpreviewImage('');
     }
 
 
@@ -80,7 +80,7 @@ const EditUser = () => {
                                                 <input type="radio" value="Male" defaultValue={user.Male} name="gender" className='me-1' />
                                                 Male
                                             </label>
-                                            <label me-2>
+                                            <label>
                                                 <input type="radio" value="Female" name="gender" defaultValue={user.Female} className='me-1' />
                                                 Female
                                             </label>
@@ -95,8 +95,11 @@ const EditUser = () => {
 
                                 <div className="mb-3">
                                     <label className="form-label">Image<span className="text-danger">*</span></label>
-                                    <input onChange={imageHandler} type="file" name='image[]' defaultValue={user.image} multiple className="form-control form-control-lg bg-white bg-opacity-5" />
-                                    {previewImage}
+                                    <input onChange={imageHandler} type="file" name='image[]' multiple className="form-control form-control-lg bg-white bg-opacity-5" />
+                                    {
+                                        user.image?.map(image=><img key={image} src={`${baseurl}/${image}`} className="w-50" alt={image} />)
+                                    }
+                                    
                                 </div>
                                 <div className="mb-3">
                                     <button type="submit" className="btn btn-outline-theme btn-lg d-block w-100">Submit</button>

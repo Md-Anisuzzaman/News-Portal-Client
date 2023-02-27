@@ -1,5 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { updateUserApi } from "../userApi";
+import axiosInstance from "../../../utils/axios";
+
+
+export const updateUserApi = async (formData) => {
+    const res = await axiosInstance.post(`/updateuser`, formData)
+    return res.data;
+}
 
 export const asyncUpdateUser = createAsyncThunk('user/updateUser', async (formData) => {
     try {

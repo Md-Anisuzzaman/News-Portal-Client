@@ -9,43 +9,44 @@ import NewsLayout from './BackEnd/Pages/NewsManagement/NewsLayout';
 import AllUsers from './BackEnd/Pages/UserManagement/AllUsers';
 import CreateUser from './BackEnd/Pages/UserManagement/CreateUser';
 import EditUser from './BackEnd/Pages/UserManagement/EditUser';
+import SetRole from './BackEnd/Pages/UserManagement/SetRole';
 import UsersLayout from './BackEnd/Pages/UserManagement/UsersLayout';
 import FrontEndIndex from './FrontEnd/FrontEndIndex';
 import FrontEndLayout from './FrontEnd/Layouts/FrontEndLayout';
 import { FrontEndAbout, FrontEndContact } from './FrontEnd/Pages/FrontEndPagesLists';
 
-let UserManagement = {
-  state: {
-    users: [],
-    user: {},
-  },
+// let UserManagement = {
+//   state: {
+//     users: [],
+//     user: {},
+//   },
 
-  setters: {
-    set_users(){
-      this.state.users = [{name: 'John'},{name: 'wick'}]
-    },
-    set_user: function(user){
-      this.state.user = user;
-    }
-  },
+//   setters: {
+//     set_users(){
+//       this.state.users = [{name: 'John'},{name: 'wick'}]
+//     },
+//     set_user: function(user){
+//       this.state.user = user;
+//     }
+//   },
 
-  getters: {
-    get_users: function(){
-      return {...this.state}.users;
-    },
-    get_user: function(){
-      return {...this.state.user};
-    },
-  }
+//   getters: {
+//     get_users: function(){
+//       return {...this.state}.users;
+//     },
+//     get_user: function(){
+//       return {...this.state.user};
+//     },
+//   }
 
-};
+// };
 
 
-UserManagement.setters.set_users.bind(UserManagement)();
-UserManagement.setters.set_user.bind(UserManagement)(UserManagement.state.users[1]);
+// UserManagement.setters.set_users.bind(UserManagement)();
+// UserManagement.setters.set_user.bind(UserManagement)(UserManagement.state.users[1]);
 
-let data = UserManagement.getters.get_user.bind(UserManagement)();
-data.name = 'ethian'
+// let data = UserManagement.getters.get_user.bind(UserManagement)();
+// data.name = 'ethian'
 
 function App() {
   return (
@@ -65,6 +66,7 @@ function App() {
           <Route path='user' element={<UsersLayout />}>
             <Route path="allusers" element={<AllUsers />} />
             <Route path="adduser" element={<CreateUser />} />
+            <Route path="setrole/:id/:username" element={<SetRole />} />
             <Route path="edituser/:id/:username" element={<EditUser />} />
           </Route>
           <Route path='news' element={<NewsLayout />}>

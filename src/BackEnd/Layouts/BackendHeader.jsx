@@ -3,28 +3,28 @@ import React from 'react';
 const BackendHeader = () => {
     function toggle_side_bar() {
         let app = document.getElementById('app');
-        if(app.classList.contains('app-sidebar-collapsed')){
+        if (app.classList.contains('app-sidebar-collapsed')) {
             app.classList.add('app-sidebar-toggled');
             app.classList.remove('app-sidebar-collapsed');
         }
-        else if(app.classList.contains('app-sidebar-toggled')){
+        else if (app.classList.contains('app-sidebar-toggled')) {
             app.classList.remove('app-sidebar-toggled');
             app.classList.add('app-sidebar-collapsed');
         }
-        
-        if(window.innerWidth < 768){
-            if(app.classList.contains('app-sidebar-mobile-collapsed')){
+
+        if (window.innerWidth < 768) {
+            if (app.classList.contains('app-sidebar-mobile-collapsed')) {
                 app.classList.add('app-sidebar-mobile-toggled');
                 app.classList.remove('app-sidebar-mobile-collapsed');
             }
-            else if(app.classList.contains('app-sidebar-mobile-toggled')){
+            else if (app.classList.contains('app-sidebar-mobile-toggled')) {
                 app.classList.remove('app-sidebar-mobile-toggled');
                 app.classList.add('app-sidebar-mobile-collapsed');
-            }else{
+            } else {
                 app.classList.add('app-sidebar-mobile-collapsed')
             }
-            
-        }else{
+
+        } else {
             app.classList.remove('app-sidebar-mobile-collapsed');
             app.classList.remove('app-sidebar-mobile-toggled');
         }
@@ -43,6 +43,7 @@ const BackendHeader = () => {
                         <span className="bar" />
                     </button>
                 </div>
+
                 <div className="mobile-toggler">
                     <button
                         type="button"
@@ -62,6 +63,11 @@ const BackendHeader = () => {
                         <span className="brand-text">News</span>
                     </a>
                 </div>
+
+                <div className="menu-search-input w-25 mt-1">
+                    <input type="text" className="form-control form-control-lg" placeholder="Search menu..." />
+                </div>
+
                 <div className="menu">
                     <div className="menu-item dropdown">
                         <a

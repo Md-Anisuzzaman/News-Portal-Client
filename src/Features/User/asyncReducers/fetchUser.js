@@ -1,6 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getUserApi } from "../userApi";
+import axiosInstance from "../../../utils/axios";
 
+export const getUserApi = async (id) => {
+    const res = await axiosInstance.get(`/user/${id}`);
+    return res.data;
+}
 
 export const asyncFetchUser = createAsyncThunk('user/fetchUser', async (id) => {
     try {

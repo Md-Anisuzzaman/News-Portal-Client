@@ -15,6 +15,8 @@ const CreateUser = () => {
     dispatch(asyncCreateUser(formData))
     e.currentTarget.reset();
     console.log(e.currentTarget);
+    setpreviewImage('');
+    
   }
 
 
@@ -28,7 +30,6 @@ const CreateUser = () => {
       )
       setpreviewImage(temp_images)
     }
-    setpreviewImage('');
   }
 
   return (
@@ -38,7 +39,6 @@ const CreateUser = () => {
           <div className="card-body">
             <form onSubmit={handleSubmit} action="" className='w-75 m-auto' method="POST" >
               <h1 className="text-center mb-4">Create User</h1>
-
               <div className="row">
                 <div className="col-lg-6 mb-3">
                   <label className="form-label">Name <span className="text-danger">*</span></label>
@@ -90,7 +90,7 @@ const CreateUser = () => {
 
               <div className="mb-3">
                 <label className="form-label">Image<span className="text-danger">*</span></label>
-                <input onChange={imageHandler} type="file" name='image[]' multiple className="form-control form-control-lg bg-white bg-opacity-5" />
+                <input onChange={imageHandler} type="file" name='image[]' className="form-control form-control-lg bg-white bg-opacity-5" />
                 {previewImage}
               </div>
               <div className="mb-3">
