@@ -18,6 +18,7 @@ export const asyncFetchUser = createAsyncThunk('user/fetchUser', async (id) => {
 const fetchUser = (builder) => {
     builder.addCase(asyncFetchUser.pending, (state) => {
         state.isLoading = true;
+        state.user = null;
     }).addCase(asyncFetchUser.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.user = payload;

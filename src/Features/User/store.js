@@ -19,12 +19,6 @@ const userSlice = createSlice({
         error: "",
     },
     reducers: {
-        // setUsers: function(state, {payload}) {
-        //     state.users = payload;
-        // },
-        // setUser: function(state, {payload}) {
-        //     state.user = payload;
-        // },
     },
     extraReducers: (builder) => {
         fetchUsers(builder)

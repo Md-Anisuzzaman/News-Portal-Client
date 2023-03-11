@@ -10,15 +10,8 @@ const AllUsers = () => {
 
   useEffect(() => {
     dispatch(asyncFetchUsers());
-  }, [])
+  }, [dispatch])
 
-
-  // const handleDelete = async (id) => {
-  //   if (window.confirm("Confirm Delete")) {
-  //     await dispatch(deleteProduct(id));
-  //     dispatch(getproducts());
-  //   }
-  // };
 
   const hndleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete")) {

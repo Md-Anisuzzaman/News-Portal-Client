@@ -1,6 +1,12 @@
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import {logout} from '../../Features/Auth/authSlice'
 
 const BackendSideBar = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     function toggle_list(e) {
         e.preventDefault();
         document.querySelectorAll('.menu-submenu').forEach(i => i.classList.remove('d-block'))
@@ -27,6 +33,11 @@ const BackendSideBar = () => {
         }
     }
 
+    const handleLogOut = (e) => {
+        e.preventDefault();
+        dispatch(logout());
+        navigate('/')
+    }
     return (
         < >
             <div id="sidebar" className="app-sidebar">
@@ -149,6 +160,12 @@ const BackendSideBar = () => {
                             <a href="#/" className="menu-link">
                                 <span className="menu-icon"><i className="fa fa-globe" /></span>
                                 <span className="menu-text">Website</span>
+                            </a>
+                        </div>
+                        <div className="menu-item">
+                            <a href="#/" className="menu-link">
+                                <span className="menu-icon"><i className="fa fa-globe" /></span>
+                                <span onClick={handleLogOut} className='menu-text'>LogOut</span>
                             </a>
                         </div>
                     </div>

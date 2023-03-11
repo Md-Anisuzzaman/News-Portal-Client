@@ -3,10 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { asyncFetchUser } from '../../../Features/User/asyncReducers/fetchUser';
 import { asyncUpdateUser } from '../../../Features/User/asyncReducers/updateUser';
-import { baseurl } from '../../../utils/axios';
-
-
-
 
 const EditUser = () => {
     const [previewImage, setpreviewImage] = useState([])
@@ -15,6 +11,7 @@ const EditUser = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        document.getElementById('editForm').reset();
         dispatch(asyncFetchUser(params.id));
     }, [])
 
@@ -23,7 +20,9 @@ const EditUser = () => {
         e.preventDefault();
         let formData = new FormData(e.target);
         formData.append('_id', params.id);
-        dispatch(asyncUpdateUser(formData))
+        if (window.confirm("Update user?")) {
+            dispatch(asyncUpdateUser(formData));
+        }
     }
 
     const imageHandler = async (e) => {
@@ -38,15 +37,13 @@ const EditUser = () => {
         }
     }
 
-
     return (
-
         user ?
             (<div className="row justify-content-center">
                 <div className="col-md-8">
                     <div className="card">
                         <div className="card-body">
-                            <form action="" onSubmit={handleSubmit} className='w-75 m-auto' method="POST" >
+                            <form action="" id='editForm' onSubmit={handleSubmit} className='w-75 m-auto' method="POST" >
                                 <h1 className="text-center mb-4">Update user profile</h1>
                                 <div className="row">
                                     <div className="col-lg-6 mb-3">
@@ -96,10 +93,11 @@ const EditUser = () => {
                                 <div className="mb-3">
                                     <label className="form-label">Image<span className="text-danger">*</span></label>
                                     <input onChange={imageHandler} type="file" name='image[]' multiple className="form-control form-control-lg bg-white bg-opacity-5" />
-                                    {
-                                        user.image?.map(image=><img key={image} src={`${baseurl}/${image}`} className="w-50" alt={image} />)
-                                    }
-                                    
+                                    {/* {
+                                        user.image?.map(image => <img key={image} src={`${baseurl}/${image}`} className="w-50" alt={image} />)
+                                    } */}
+                                    {previewImage}
+
                                 </div>
                                 <div className="mb-3">
                                     <button type="submit" className="btn btn-outline-theme btn-lg d-block w-100">Submit</button>
