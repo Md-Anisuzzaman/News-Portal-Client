@@ -13,7 +13,6 @@ const userSlice = createSlice({
         searchKey: '',
         paginate: 10,
         currentPage: 1,
-
         isLoading: false,
         isError: false,
         error: "",

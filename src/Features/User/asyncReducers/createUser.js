@@ -11,7 +11,8 @@ export const asyncCreateUser = createAsyncThunk('user/createUser', async (formDa
         const user = await createUserApi(formData);
         return user;
     } catch (error) {
-        console.log("kno error--> ", error.message);
+        console.log("errrrasdfdas fdasf ", error);
+        throw new Error(error);
     }
 });
 
@@ -19,12 +20,13 @@ const createUser = (builder) => {
     builder.addCase(asyncCreateUser.pending, (state) => {
         state.isLoading = true;
     }).addCase(asyncCreateUser.fulfilled, (state, { payload }) => {
-        state.isLoading = false
+        state.isLoading = false;
         state.user = payload;
     }).addCase(asyncCreateUser.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.error = action.error?.message
+        state.isLoading = false;
+        state.isError = true;
+        state.error = action.error?.message;
+        
     });
 
 

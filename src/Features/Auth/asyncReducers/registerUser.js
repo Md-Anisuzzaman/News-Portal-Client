@@ -11,8 +11,7 @@ export const asyncRegister = createAsyncThunk('user/registerUser', async (formDa
         const user = await registerApi(formData);
         return user;
     } catch (error) {
-        console.log("kno error--> ", error.message);
-        throw new Error(error.message);
+        throw new Error(JSON.stringify(error.response.data.errors))
     }
 });
 
@@ -29,9 +28,9 @@ const registerUser = (builder) => {
         state.token = token;
         state.loading = false;
         state.error = null;
-    }).addCase(asyncRegister.rejected, (state, action) => {
+    }).addCase(asyncRegister.rejected, (state, payload) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = JSON.parse(payload.error.message);
     });
 }
 

@@ -13,7 +13,7 @@ const EditUser = () => {
     useEffect(() => {
         document.getElementById('editForm').reset();
         dispatch(asyncFetchUser(params.id));
-    }, [])
+    })
 
 
     const handleSubmit = (e) => {
