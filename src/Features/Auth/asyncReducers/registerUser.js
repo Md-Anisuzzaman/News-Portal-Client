@@ -27,10 +27,19 @@ const registerUser = (builder) => {
         }
         state.token = token;
         state.loading = false;
-        state.error = null;
+        state.formErrors = {};
     }).addCase(asyncRegister.rejected, (state, payload) => {
         state.loading = false;
-        state.error = JSON.parse(payload.error.message);
+        let temp = {
+            username: [],
+            email: [],
+            password: []
+        }
+        JSON.parse(payload.error.message)?.map(err => {
+            temp[err.param].push(<li>{err.msg}</li>)
+            return err;
+        })
+        state.formErrors = temp;
     });
 }
 

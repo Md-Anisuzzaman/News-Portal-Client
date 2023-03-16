@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import {logout} from '../../Features/Auth/authSlice'
+import { logout } from '../../Features/Auth/authSlice'
 
 const BackendSideBar = () => {
 
@@ -35,9 +35,12 @@ const BackendSideBar = () => {
 
     const handleLogOut = (e) => {
         e.preventDefault();
-        dispatch(logout());
-        navigate('/')
+        if (window.confirm("You want to logout from dashboard ?")) {
+            dispatch(logout());
+            navigate('/')
+        }
     }
+    
     return (
         < >
             <div id="sidebar" className="app-sidebar">

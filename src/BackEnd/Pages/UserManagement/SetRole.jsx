@@ -5,7 +5,6 @@ import { asyncFetchUser } from '../../../Features/User/asyncReducers/fetchUser';
 import { asyncSetRole } from '../../../Features/User/asyncReducers/setRole';
 
 const SetRole = () => {
-
     const user = useSelector((state) => state.UserStore.user);
     const params = useParams();
     const dispatch = useDispatch()
@@ -17,8 +16,7 @@ const SetRole = () => {
 
     useEffect(() => {
         setRole(user.role)
-    },[user])
-
+    },[])
 
     const handleSubmit = (e) => {
         e.preventDefault();

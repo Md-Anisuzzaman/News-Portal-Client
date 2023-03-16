@@ -11,8 +11,7 @@ export const asyncLogin = createAsyncThunk('user/loginUser', async (formData) =>
         const user = await loginApi(formData);
         return user;
     } catch (error) {
-        console.log("kno error--> ", error.message);
-        throw new Error(error.message);
+        throw new Error(JSON.stringify(error.response.data.errors))
     }
 });
 
@@ -31,11 +30,19 @@ const loginUser = (builder) => {
             console.log("paichi", state.authenticated);
             state.token = token;
             state.loading = false;
-            state.error = null;
+            state.formErrors = {};
         })
-        .addCase(asyncLogin.rejected, (state, action) => {
+        .addCase(asyncLogin.rejected, (state, payload) => {
             state.loading = false;
-            state.error = action.error.message;
+            let temp = {
+                email: [],
+                password: []
+            }
+            JSON.parse(payload.error.message)?.map(err => {
+                temp[err.param].push(<li>{err.msg}</li>)
+                return err;
+            })
+            state.formErrors = temp;
         });
 }
 

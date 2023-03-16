@@ -10,26 +10,28 @@ const authSlice = createSlice({
         loading: false,
         authenticated: false,
         token: null,
-        error: null,
+        formErrors: {},
         checkloginLoading: false
     },
     reducers: {
+        removeErrors: (state, action) => {
+            state.formErrors = action.payload;
+        },
         logout: (state) => {
             state.token = null;
             state.authenticated = false;
-            state.error = null;
+            state.errors = null;
             localStorage.removeItem("token");
         },
-
         checkLogIn: (state) => {
             if (localStorage.token) {
                 state.authenticated = true;
-                state.token = localStorage.token;
+                // state.token = localStorage.token;
             }
-            state.checkloginLoading = true;
+            state.checkloginLoading = false;
+
         },
     },
-
     extraReducers: (builder) => {
         registerUser(builder)
         loginUser(builder)
@@ -37,5 +39,5 @@ const authSlice = createSlice({
 
 });
 
-export const { logout, checkLogIn } = authSlice.actions;
+export const { logout, checkLogIn, removeErrors} = authSlice.actions;
 export default authSlice;

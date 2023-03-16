@@ -1,4 +1,3 @@
-import React from 'react';
 import { HashRouter, Route, Routes } from "react-router-dom";
 import BackEndLayout from './BackEnd/Layouts/BackEndLayout';
 import BackEndHome from './BackEnd/Pages/BackEndHome';
@@ -12,6 +11,7 @@ import EditUser from './BackEnd/Pages/UserManagement/EditUser';
 import SetRole from './BackEnd/Pages/UserManagement/SetRole';
 import UsersLayout from './BackEnd/Pages/UserManagement/UsersLayout';
 import Login from './FrontEnd/Auth/Login';
+import PrivateRoute from './FrontEnd/Auth/PrivateRoute';
 import Register from './FrontEnd/Auth/Register';
 import FrontEndIndex from './FrontEnd/FrontEndIndex';
 import FrontEndLayout from './FrontEnd/Layouts/FrontEndLayout';
@@ -30,7 +30,7 @@ function App() {
           <Route path='contact' element={<FrontEndContact />}></Route>
         </Route>
 
-        <Route path='dashboard' element={<BackEndLayout />} >
+        <Route path='dashboard' element={<PrivateRoute><BackEndLayout /> </PrivateRoute>} >
           <Route path='' element={<BackEndHome />} />
           <Route path='all-message' element={<BackEndMessageAllMessage />} />
 
@@ -44,7 +44,6 @@ function App() {
             <Route path="addnews" element={<CreateNews />} />
             <Route path="editnews" element={<EditNews />} />
           </Route>
-
         </Route>
 
       </Routes>
