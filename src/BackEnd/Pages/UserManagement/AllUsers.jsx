@@ -7,11 +7,11 @@ import { asyncDeleteUser } from '../../../Features/User/asyncReducers/deleteUser
 const AllUsers = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.UserStore.users);
+  const token = window.localStorage.getItem('token');
 
   useEffect(() => {
     dispatch(asyncFetchUsers());
-  }, [dispatch])
-
+  }, [dispatch,token])
 
   const hndleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete")) {
@@ -32,7 +32,6 @@ const AllUsers = () => {
               <thead>
                 <tr>
                   <th scope="col">ID</th>
-                  <th scope="col">Created At</th>
                   <th scope="col">Name</th>
                   <th scope="col">Role</th>
                   <th scope="col">Email</th>
@@ -44,7 +43,6 @@ const AllUsers = () => {
                   users.map(user => (
                     <tr key={user._id}>
                       <td>{user._id}</td>
-                      <td>{user.user_created_at}</td>
                       <td>{user.username}</td>
                       <td>{user.role}</td>
                       <td>{user.email}</td>

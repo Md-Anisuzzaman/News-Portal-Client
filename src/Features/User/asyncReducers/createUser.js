@@ -11,7 +11,6 @@ export const asyncCreateUser = createAsyncThunk('user/createUser', async (formDa
         const user = await createUserApi(formData);
         return user;
     } catch (error) {
-        console.log("errrrasdfdas fdasf ", error);
         throw new Error(error);
     }
 });

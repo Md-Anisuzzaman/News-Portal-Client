@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../utils/axios";
 
-
-export const getUsersApi = async () => {
+export const getUsersApi = async (token) => {
     const res = await axiosInstance.get('/allusers');
     return res.data;
 }
@@ -28,7 +27,5 @@ const fetchUsers = (builder) => {
         state.isError = true
         state.error = action.error?.message
     });
-
-
 }
 export default fetchUsers;

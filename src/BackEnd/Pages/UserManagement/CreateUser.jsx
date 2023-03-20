@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { asyncCreateUser } from '../../../Features/User/asyncReducers/createUser';
 
-
-
 const CreateUser = () => {
 
   const [previewImage, setpreviewImage] = useState([])
@@ -16,7 +14,6 @@ const CreateUser = () => {
     e.currentTarget.reset();
     console.log(e.currentTarget);
     setpreviewImage('');
-    
   }
 
 

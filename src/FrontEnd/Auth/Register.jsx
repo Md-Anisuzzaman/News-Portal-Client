@@ -21,7 +21,7 @@ const Register = () => {
             navigate("/dashboard");
         }
         dispatch(removeErrors({}));
-    }, [authenticated, navigate])
+    }, [authenticated, navigate,dispatch])
 
 
     return (

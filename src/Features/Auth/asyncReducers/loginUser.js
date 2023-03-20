@@ -11,7 +11,7 @@ export const asyncLogin = createAsyncThunk('user/loginUser', async (formData) =>
         const user = await loginApi(formData);
         return user;
     } catch (error) {
-        throw new Error(JSON.stringify(error.response.data.errors))
+        throw new Error(JSON.stringify(error.response.data?.errors))
     }
 });
 
@@ -19,21 +19,28 @@ const loginUser = (builder) => {
     builder
         .addCase(asyncLogin.pending, (state) => {
             state.loading = true;
+            state.authenticated = false;
         })
         .addCase(asyncLogin.fulfilled, (state, action) => {
-            let token = action.payload.data.token;
-            let status = action.payload.status;
-            if (status === 'success') {
-                window.localStorage.setItem('token', token);
+            console.log("all data", action.payload);
+            try {
+                let token = action.payload.data.token;
+                let status = action.payload.status;
+                if (status === 'success') {
+                    window.localStorage.setItem('token', token);
+                    state.authenticated = true;
+                }
                 state.authenticated = true;
-            }
-            console.log("paichi", state.authenticated);
-            state.token = token;
-            state.loading = false;
-            state.formErrors = {};
+                state.token = token;
+                state.loading = false;
+                state.formErrors = {};
+            } catch (error) {
+                console.log('error ',error);
+            } 
         })
         .addCase(asyncLogin.rejected, (state, payload) => {
             state.loading = false;
+            console.log(payload);
             let temp = {
                 email: [],
                 password: []

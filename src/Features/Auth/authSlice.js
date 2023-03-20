@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import authMiddleWare from './asyncReducers/authMiddleWare';
 import loginUser from './asyncReducers/loginUser';
 import registerUser from './asyncReducers/registerUser';
-
-
 
 const authSlice = createSlice({
     name: 'auth',
@@ -14,6 +13,12 @@ const authSlice = createSlice({
         checkloginLoading: false
     },
     reducers: {
+        setAuthenticated: (state, action) => {
+            state.authenticated = action.payload;
+        },
+        setToken: (state, action) => {
+            state.token = action.payload;
+        },
         removeErrors: (state, action) => {
             state.formErrors = action.payload;
         },
@@ -21,23 +26,22 @@ const authSlice = createSlice({
             state.token = null;
             state.authenticated = false;
             state.errors = null;
-            localStorage.removeItem("token");
+            window.localStorage.removeItem("token");
         },
-        checkLogIn: (state) => {
-            if (localStorage.token) {
+        checkLogIn: (state, action) => {
+            if (window.localStorage.token) {
+                state.token = window.localStorage.token;
                 state.authenticated = true;
-                // state.token = localStorage.token;
             }
             state.checkloginLoading = false;
-
         },
     },
     extraReducers: (builder) => {
         registerUser(builder)
         loginUser(builder)
+        authMiddleWare(builder)
     },
-
 });
 
-export const { logout, checkLogIn, removeErrors} = authSlice.actions;
+export const { logout, checkLogIn, removeErrors, setAuthenticated, setToken } = authSlice.actions;
 export default authSlice;

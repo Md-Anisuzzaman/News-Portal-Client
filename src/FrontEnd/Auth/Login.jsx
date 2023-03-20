@@ -15,7 +15,6 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         let formData = new FormData(e.target)
-        console.log(formData);
         dispatch(asyncLogin(formData));
     };
 
@@ -24,7 +23,7 @@ const Login = () => {
             navigate("/dashboard");
         }
         dispatch(removeErrors({}));
-    }, [authenticated, navigate])
+    }, [authenticated,navigate,dispatch])
 
     return (
         <>
