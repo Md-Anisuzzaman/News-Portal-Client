@@ -3,7 +3,11 @@ import axiosInstance from "../../../utils/axios";
 
 
 export const updateUserApi = async (formData) => {
-    const res = await axiosInstance.post(`/updateuser`, formData)
+    const res = await axiosInstance.post(`/updateuser`, formData, {
+        headers: {
+            authorization: 'Bearer ' + window.localStorage.getItem('token') //the token is a variable which holds the token
+        },
+    })
     return res.data;
 }
 

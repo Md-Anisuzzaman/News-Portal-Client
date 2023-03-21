@@ -2,8 +2,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../utils/axios";
 
 
-export const deleteUserApi= async (id) => {
-    const res = await axiosInstance.post(`/deleteuser/${id}`)
+export const deleteUserApi = async (id) => {
+    console.log("hello delete", window.localStorage.getItem('token'));
+    const res = await axiosInstance.post(`/deleteuser/${id}`, null, {
+        headers: {
+            authorization: 'Bearer ' + window.localStorage.getItem('token') //the token is a variable which holds the token
+        },
+    });
     return res.data;
 }
 

@@ -2,11 +2,18 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../utils/axios";
 
 export const setRoleApi = async (formData) => {
-    const res = await axiosInstance.post('/makeAdmin',formData);
+    const res = await axiosInstance.post('/makeAdmin', formData, {
+        headers: {
+            authorization: 'Bearer ' + window.localStorage.getItem('token') //the token is a variable which holds the token
+        }
+    });
+
+    console.log(window.localStorage.getItem('token'));
+
     return res.data;
 }
 
-export const asyncSetRole= createAsyncThunk('user/createUser', async (formData) => {
+export const asyncSetRole = createAsyncThunk('user/createUser', async (formData) => {
     try {
         const user = await setRoleApi(formData);
         return user;
@@ -20,7 +27,7 @@ const SetRole = (builder) => {
         state.isLoading = true;
     }).addCase(asyncSetRole.fulfilled, (state, { payload }) => {
         state.isLoading = false
-        console.log("amar payload",payload);
+        console.log("amar payload", payload);
         state.user = payload;
     }).addCase(asyncSetRole.rejected, (state, action) => {
         state.isLoading = false

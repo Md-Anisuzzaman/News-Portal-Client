@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import authMiddleWare from './asyncReducers/authMiddleWare';
 import loginUser from './asyncReducers/loginUser';
 import registerUser from './asyncReducers/registerUser';
 
@@ -39,7 +38,6 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         registerUser(builder)
         loginUser(builder)
-        authMiddleWare(builder)
     },
 });
 

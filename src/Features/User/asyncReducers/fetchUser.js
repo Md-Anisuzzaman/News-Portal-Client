@@ -2,7 +2,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../utils/axios";
 
 export const getUserApi = async (id) => {
-    const res = await axiosInstance.get(`/user/${id}`);
+    const res = await axiosInstance.get(`/user/${id}`, {
+        headers: {
+            authorization: 'Bearer ' + window.localStorage.getItem('token') //the token is a variable which holds the token
+        }
+    });
     return res.data;
 }
 
