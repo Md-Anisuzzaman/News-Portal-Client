@@ -108,6 +108,13 @@ const BackendSideBar = () => {
                                 </span>
                             </a>
                             <div className="menu-submenu">
+
+                                <div className="menu-item">
+                                    <Link to="/dashboard/news/allnews" className="menu-link">
+                                        <span className="menu-text">ALL News</span>
+                                    </Link>
+                                </div>
+                                
                                 <div className="menu-item">
                                     <Link to="/dashboard/news/addnews" className="menu-link">
                                         <span className="menu-text">Create News</span>
@@ -126,11 +133,6 @@ const BackendSideBar = () => {
                                 <div className="menu-item">
                                     <a href="email_compose.html" className="menu-link">
                                         <span className="menu-text">News Sub Category</span>
-                                    </a>
-                                </div>
-                                <div className="menu-item">
-                                    <a href="email_detail.html" className="menu-link">
-                                        <span className="menu-text">News list</span>
                                     </a>
                                 </div>
                                 <div className="menu-item">

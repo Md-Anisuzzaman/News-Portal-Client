@@ -4,6 +4,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import BackEndLayout from './BackEnd/Layouts/BackEndLayout';
 import BackEndHome from './BackEnd/Pages/BackEndHome';
 import { BackEndMessageAllMessage } from './BackEnd/Pages/Message/BackendPageList';
+import AllNews from "./BackEnd/Pages/NewsManagement/AllNews";
 import CreateNews from './BackEnd/Pages/NewsManagement/CreateNews';
 import EditNews from './BackEnd/Pages/NewsManagement/EditNews';
 import NewsLayout from './BackEnd/Pages/NewsManagement/NewsLayout';
@@ -59,6 +60,7 @@ function App() {
           </Route>
 
           <Route path='news' element={<NewsLayout />}>
+            <Route path="allnews" element={<AllNews />} />
             <Route path="addnews" element={<CreateNews />} />
             <Route path="editnews" element={<EditNews />} />
           </Route>
