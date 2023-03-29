@@ -2,15 +2,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 import { asyncLogin } from '../../Features/Auth/asyncReducers/loginUser';
-import { removeErrors } from '../../Features/Auth/authSlice';
-
+import { removeErrors} from '../../Features/Auth/authSlice';
 
 const Login = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { authenticated, formErrors } = useSelector((state) => state.auth);
+    const { authenticated, formErrors, previousPath } = useSelector((state) => state.auth);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -19,11 +18,14 @@ const Login = () => {
     };
 
     useEffect(() => {
+        console.log(previousPath);
         if (authenticated) {
-            navigate("/dashboard");
+            if (previousPath) {
+                return navigate(`${previousPath}`)
+            }
         }
         dispatch(removeErrors({}));
-    }, [authenticated,navigate,dispatch])
+    }, [authenticated, navigate, dispatch,previousPath])
 
     return (
         <>

@@ -9,11 +9,15 @@ const authSlice = createSlice({
         authenticated: false,
         token: null,
         formErrors: {},
-        checkloginLoading: false
+        checkloginLoading: false,
+        previousPath: ""
     },
     reducers: {
         setAuthenticated: (state, action) => {
             state.authenticated = action.payload;
+        },
+        setPath: (state, action) => {
+            state.previousPath = action.payload
         },
         setToken: (state, action) => {
             state.token = action.payload;
@@ -41,5 +45,5 @@ const authSlice = createSlice({
     },
 });
 
-export const { logout, checkLogIn, removeErrors, setAuthenticated, setToken } = authSlice.actions;
+export const { logout, checkLogIn, removeErrors, setAuthenticated, setToken, setPath } = authSlice.actions;
 export default authSlice;

@@ -1,6 +1,4 @@
-
 import Select from 'react-select'
-
 
 const CreateNews = () => {
     const options = [
@@ -12,6 +10,16 @@ const CreateNews = () => {
     const handleChange = (selectedOption) => {
         console.log(selectedOption);
     }
+
+    // const loadOptions = (searchValue, callback) => {
+    //     setTimeout(() => {
+    //         const filteredOptions = options.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase())
+    //         );
+    //         console.log('loadOptions', searchValue, filteredOptions)
+    //         callback(filteredOptions);
+    //     }, 200);
+    // };
+
     return (
         <div className="row justify-content-center">
             <div className="col-md-8">
@@ -36,7 +44,13 @@ const CreateNews = () => {
                                 <label className="form-label">Category<span className="text-danger">*</span></label>
                                 {/* <select name='' onChange={handleChange} options={options} className="form-control form-control-lg bg-white bg-opacity-5" /> */}
                                 <Select
-                                    className="form-control form-control-lg bg-white bg-opacity-5"
+                                    // className="form-control form-control-lg bg-white bg-opacity-5"
+                                    styles={{
+                                        control: (baseStyles, state) => ({
+                                          ...baseStyles,
+                                          borderColor: state.isFocused ? 'grey' : 'red',
+                                        }),
+                                      }}
                                     onChange={handleChange}
                                     options={options}
                                     isMulti
