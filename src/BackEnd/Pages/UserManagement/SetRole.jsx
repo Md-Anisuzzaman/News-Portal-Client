@@ -6,6 +6,7 @@ import { asyncSetRole } from '../../../Features/User/asyncReducers/setRole';
 
 const SetRole = () => {
     const user = useSelector((state) => state.UserStore.user);
+    console.log(user);
     const params = useParams();
     const dispatch = useDispatch()
     const [role, setRole] = useState('');

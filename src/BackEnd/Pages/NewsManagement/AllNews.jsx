@@ -1,7 +1,20 @@
-import React from 'react'
-// import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { asyncFetchAllNews } from '../../../Features/News/asyncReducers/fetchAllNews';
 
 const AllNews = () => {
+
+  const dispatch = useDispatch();
+  // const params = useParams();
+  const allNews = useSelector((state) => state.newsStore.allNews);
+  console.log("pao", allNews);
+
+  useEffect(() => {
+    const result = dispatch(asyncFetchAllNews());
+    console.log("amar", result);
+  }, [dispatch])
+
   return (
     <div className='container'>
       <div className="card">
@@ -16,24 +29,25 @@ const AllNews = () => {
                   <th scope="col">ID</th>
                   <th scope="col">Author</th>
                   <th scope="col">Title</th>
+                  <th scope="col">Description</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-                {/* {
-                  users.map(user => (
-                    <tr key={user._id}>
-                      <td>{user._id}</td>
-                      <td>{user.username}</td>
-                      <td>{user.role}</td>
-                      <td>{user.email}</td>
+                {
+                  allNews?.map(news => (
+                    <tr key={news._id}>
+                      <td>{news._id}</td>
+                      <td>{news.author}</td>
+                      <td>{news.title}</td>
+                      <td>{news.description}</td>
+                      <td>{news.email}</td>
                       <td>
-                        <Link to={`/dashboard/user/setrole/${user._id}/${encodeURI(user.username.replaceAll(' ', '-'))}`} className='btn btn-outline-info me-2'>Set Role</Link>
-                        <Link to={`/dashboard/user/edituser/${user._id}/${encodeURI(user.username.replaceAll(' ', '-'))}`}><button className='btn btn-outline-success me-2'>Edit User</button></Link>
-                        <button onClick={() => hndleDelete(user._id)} className='btn btn-outline-danger'>Delete</button>
+                        <Link to='/dashboard/news/editnews'><button className='btn btn-outline-success me-2'>Edit News</button></Link>
+                        <button className='btn btn-outline-danger'>Delete</button>
                       </td>
                     </tr>
-                  ))} */}
+                  ))}
               </tbody>
             </table>
           </div>
