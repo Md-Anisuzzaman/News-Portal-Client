@@ -62,7 +62,7 @@ function App() {
           <Route path='news' element={<NewsLayout />}>
             <Route path="allnews" element={<AllNews />} />
             <Route path="addnews" element={<CreateNews />} />
-            <Route path="editnews" element={<EditNews />} />
+            <Route path="editnews/:id/:title" element={<EditNews />} />
           </Route>
         </Route>
 

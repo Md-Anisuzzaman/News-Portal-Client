@@ -24,7 +24,6 @@ const fetchAllNews = (builder) => {
     }).addCase(asyncFetchAllNews.fulfilled, (state, { payload }) => {
         state.isLoading = false
         state.allNews = payload.result;
-        console.log("kkkk", state.allNews );
     }).addCase(asyncFetchAllNews.rejected, (state, action) => {
         state.isLoading = false
         state.allNews = [];

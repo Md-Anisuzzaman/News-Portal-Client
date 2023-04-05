@@ -11,9 +11,9 @@ export const createNewsApi = async (formData) => {
 }
 
 export const asyncCreateNews = createAsyncThunk('news/createNews', async (formData) => {
-    console.log('fcgcfhdf');
     try {
         const news = await createNewsApi(formData);
+        console.log(news);
         return news;
     } catch (error) {
         throw new Error(error);
@@ -26,6 +26,7 @@ const createNews = (builder) => {
     }).addCase(asyncCreateNews.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.news = payload;
+        console.log(state.news);
     }).addCase(asyncCreateNews.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;

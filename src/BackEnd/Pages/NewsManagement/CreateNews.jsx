@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { Editor } from '@tinymce/tinymce-react';
 import { useDispatch } from 'react-redux';
 
 import Select from 'react-select';
@@ -27,22 +28,25 @@ const customStyles = {
 };
 
 const CreateNews = () => {
-    const [previewImage, setpreviewImage] = useState([])
+    const [previewImage, setpreviewImage] = useState([]);
     const animatedComponents = makeAnimated();
+    const editorRef = useRef(null);
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget)
+        const formData = new FormData(e.currentTarget);
+        formData.append('description', editorRef.current.getContent());
         dispatch(asyncCreateNews(formData))
-        // e.currentTarget.reset();
-        // console.log(e.currentTarget);
-        // setpreviewImage('');
+        e.currentTarget.reset();
+        console.log(e.currentTarget);
+        setpreviewImage('');
     }
 
     const imageHandler = async (e) => {
+        e.preventDefault();
         let files = await e.target.files;
-        let temp_images = []
+        let temp_images = [];
         let index = 1;
         for (const file of files) {
             temp_images.push(
@@ -87,13 +91,31 @@ const CreateNews = () => {
 
                             <div className="mb-3 col-lg-12">
                                 <label className="form-label">Image<span className="text-danger">*</span></label>
-                                <input onChange={imageHandler} accept="image/*" type="file" name='image[]' className="form-control form-control-lg bg-white bg-opacity-5" />
+                                <input onChange={imageHandler} accept="image/*" type="file" multiple name='image[]' className="form-control form-control-lg bg-white bg-opacity-5" />
                                 {previewImage}
                             </div>
 
                             <div className="mb-3">
                                 <label className="form-label">Description<span className="text-danger">*</span></label>
-                                <textarea className="form-control form-control-lg bg-white bg-opacity-5" name='description' cols="10" rows="3"></textarea>
+                                <Editor
+                                    onInit={(evt, editor) => editorRef.current = editor}
+                                    // initialValue="<p>This is the initial content of the editor.</p>"
+                                    init={{
+                                        height: 200,
+                                        menubar: false,
+                                        plugins: [
+                                            'advlist autolink lists link image charmap print preview anchor',
+                                            'searchreplace visualblocks code fullscreen',
+                                            'insertdatetime media table paste code help wordcount'
+                                        ],
+                                        toolbar: 'undo redo | formatselect | ' +
+                                            'bold italic backcolor | alignleft aligncenter ' +
+                                            'alignright alignjustify | bullist numlist outdent indent | ' +
+                                            'removeformat | help',
+                                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                                    }}
+                                />
+                                {/* <textarea className="form-control form-control-lg bg-white bg-opacity-5" name='description' cols="10" rows="3"></textarea> */}
                             </div>
 
                             <div className="mt-4">

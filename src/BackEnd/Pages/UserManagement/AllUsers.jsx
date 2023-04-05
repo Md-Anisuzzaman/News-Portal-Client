@@ -11,9 +11,9 @@ const AllUsers = () => {
 
   useEffect(() => {
     dispatch(asyncFetchUsers());
-  }, [dispatch,token])
+  }, [dispatch, token])
 
-  const hndleDelete = async (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete")) {
       await dispatch(asyncDeleteUser(id));
       await dispatch(asyncFetchUsers(id));
@@ -49,7 +49,7 @@ const AllUsers = () => {
                       <td>
                         <Link to={`/dashboard/user/setrole/${user._id}/${encodeURI(user.username.replaceAll(' ', '-'))}`} className='btn btn-outline-info me-2'>Set Role</Link>
                         <Link to={`/dashboard/user/edituser/${user._id}/${encodeURI(user.username.replaceAll(' ', '-'))}`}><button className='btn btn-outline-success me-2'>Edit User</button></Link>
-                        <button onClick={() => hndleDelete(user._id)} className='btn btn-outline-danger'>Delete</button>
+                        <button onClick={() => handleDelete(user._id)} className='btn btn-outline-danger'>Delete</button>
                       </td>
                     </tr>
                   ))}

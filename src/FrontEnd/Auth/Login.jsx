@@ -18,7 +18,6 @@ const Login = () => {
     };
 
     useEffect(() => {
-        console.log(previousPath);
         if (authenticated) {
             if (previousPath) {
                 return navigate(`${previousPath}`)

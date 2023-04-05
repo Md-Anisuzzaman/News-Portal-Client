@@ -1,6 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import createNews from './asyncReducers/createNews';
+import deleteNews from './asyncReducers/deleteNews';
 import fetchAllNews from './asyncReducers/fetchAllNews';
+import updateNews from './asyncReducers/updateNews';
+import fetchNews from './asyncReducers/fetchNews';
 
 const news_Slice = createSlice({
     name: 'news',
@@ -19,6 +22,9 @@ const news_Slice = createSlice({
     extraReducers: (builder) => {
         fetchAllNews(builder)
         createNews(builder)
+        deleteNews(builder)
+        updateNews(builder)
+        fetchNews(builder)
     },
 
 });

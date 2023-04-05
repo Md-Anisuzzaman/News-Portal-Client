@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../utils/axios";
 
 export const getNewsApi = async (id) => {
-    const res = await axiosInstance.get(`/getCategory/${id}`, {
+    const res = await axiosInstance.get(`/getcategory/${id}`, {
         headers: {
             authorization: 'Bearer ' + window.localStorage.getItem('token') //the token is a variable which holds the token
         }
@@ -13,20 +13,21 @@ export const getNewsApi = async (id) => {
 export const asyncFetchNews = createAsyncThunk('user/fetchNews', async (id) => {
     try {
         const data = await getNewsApi(id);
+        console.log("data vai",data.result);
         return data.result;
     } catch (error) {
         console.log("kno error --> ", error.message);
     }
 });
 
-const fetchUser = (builder) => {
+const fetchNews = (builder) => {
     builder.addCase(asyncFetchNews.pending, (state) => {
         state.isLoading = true;
         state.news = null;
     }).addCase(asyncFetchNews.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.news = payload;
-        console.log("ffff",state.news);
+        console.log("ffff", state.news);
     }).addCase(asyncFetchNews.rejected, (state, action) => {
         state.isLoading = false;
         state.news = {};
@@ -34,4 +35,4 @@ const fetchUser = (builder) => {
         state.error = action.error?.message
     })
 }
-export default fetchUser;
+export default fetchNews;
