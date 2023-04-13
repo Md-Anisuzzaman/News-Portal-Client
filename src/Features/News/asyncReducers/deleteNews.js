@@ -2,8 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../utils/axios";
 
 export const deleteNewsApi = async (id) => {
-    console.log("hello delete", window.localStorage.getItem('token'));
-    const res = await axiosInstance.post(`/deleteNews/${id}`, null, {
+   
+    const res = await axiosInstance.post(`/deletenews/${id}`, null, {
         headers: {
             authorization: 'Bearer ' + window.localStorage.getItem('token') //the token is a variable which holds the token
         },
@@ -11,7 +11,8 @@ export const deleteNewsApi = async (id) => {
     return res.data;
 }
 
-export const asyncDeleteNews = createAsyncThunk('news/deleteNews', async (id) => {
+export const asyncDeleteNews = createAsyncThunk('news/deletenews', async (id) => {
+    console.log("hello delete", id);
     try {
         const news = await deleteNewsApi(id);
         return news;

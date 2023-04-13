@@ -1,60 +1,84 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+
+import { colourOptions } from './docs';
 import { useParams } from 'react-router-dom';
 import { asyncFetchNews } from '../../../Features/News/asyncReducers/fetchNews';
-import { asyncUpdateNews } from '../../../Features/News/asyncReducers/updateNews';
+// import { asyncUpdateNews } from '../../../Features/News/asyncReducers/updateNews';
+
+const customStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    borderRadius: '10px',
+    borderColor: state.isFocused ? '#00BFFF' : 'rgba(0, 0, 0, 0.3)',
+    boxShadow: state.isFocused ? '0 0 0 1px #00BFFF' : 'none',
+    '&:hover': {
+      borderColor: state.isFocused ? '#00BFFF' : 'rgba(0, 0, 0, 0.5)',
+    }
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected ? '#00BFFF' : 'white',
+    color: state.isSelected ? 'white' : 'black',
+    '&:hover': {
+      backgroundColor: state.isSelected ? '#00BFFF' : '#F5F5F5',
+    }
+  })
+};
 
 
 const EditNews = () => {
 
   const news = useSelector((state) => state.newsStore.news);
-  console.log("amar news", news);
-  const [previewImage, setpreviewImage] = useState([]);
+  // const [previewImage, setpreviewImage] = useState([]);
   const [newsData, setNewsData] = useState();
 
+  const animatedComponents = makeAnimated();
   const editorRef = useRef(null);
   const params = useParams();
   const dispatch = useDispatch();
+
 
   console.log("mera news", news);
 
   useEffect(() => {
     dispatch(asyncFetchNews(params.id))
-    setNewsData(news);
-  }, [])
+  }, [dispatch, params.id])
 
+  // setNewsData(news);
+  // console.log("koi data", newsData);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   let formData = new FormData(e.target);
+  //   formData.append('_id', params.id);
+  //   if (window.confirm("Update news?")) {
+  //     dispatch(asyncUpdateNews(formData));
+  //   }
+  // }
 
-  console.log("koi data", newsData);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let formData = new FormData(e.target);
-    formData.append('_id', params.id);
-    formData.append('description', editorRef.current.getContent());
-    if (window.confirm("Update news?")) {
-      dispatch(asyncUpdateNews(formData));
-    }
-  }
+  // const imageHandler = async (e) => {
+  //   let files = await e.target.files;
+  //   let temp_images = []
+  //   let index = 1;
+  //   for (const file of files) {
+  //     temp_images.push(
+  //       <img className='w-25 me-3' key={index++} src={window.URL.createObjectURL(file)} alt="" />
+  //     )
+  //     setpreviewImage(temp_images)
+  //   }
+  // }
 
-  const imageHandler = async (e) => {
-    let files = await e.target.files;
-    let temp_images = []
-    let index = 1;
-    for (const file of files) {
-      temp_images.push(
-        <img className='w-25 me-3' key={index++} src={window.URL.createObjectURL(file)} alt="" />
-      )
-      setpreviewImage(temp_images)
-    }
-  }
 
   return (
     news ? (<div className="row justify-content-center" >
       <div className="col-md-8">
         <div className="card">
           <div className="card-body">
-            <form action="" className='w-75 m-auto' onSubmit={handleSubmit} method="POST" >
+            <form action="" className='w-75 m-auto' method="POST" >
               <h1 className="text-center mb-4">Update News</h1>
               <div className="row">
                 <div className="col-lg-6 mb-3">
@@ -70,22 +94,35 @@ const EditNews = () => {
               </div>
 
               <div className="mb-3 col-lg-12">
+                <label className="form-label">Category<span className="text-danger">*</span></label>
+                <Select
+                  closeMenuOnSelect={false}
+                  components={animatedComponents}
+                  // defaultValue={news.category.map(element => element)}
+                  // defaultValue={[colourOptions[4], colourOptions[5]]}
+                  isMulti
+                  options={colourOptions}
+                  styles={customStyles}
+                  name="category"
+                />
+              </div>
+
+              <div className="mb-3 col-lg-12">
                 <label className="form-label">Image<span className="text-danger">*</span></label>
-                <input onChange={imageHandler} accept="image/*" type="file" multiple name='image[]' className="form-control form-control-lg bg-white bg-opacity-5" />
+                <input accept="image/*" type="file" multiple name='image[]' className="form-control form-control-lg bg-white bg-opacity-5" />
                 {/* {
-                  news.image?.map(image => <img key={image} src={`${baseurl}/${image}`} className="w-50" alt={image} />)
+              news.image?.map(image => <img key={image} src={`${baseurl}/${image}`} className="w-50" alt={image} />)
 
-                } */}
+            } */}
 
-                {previewImage}
+                {/* {previewImage} */}
               </div>
 
               <div className="mb-3">
                 <label className="form-label">Description<span className="text-danger">*</span></label>
                 <Editor
-                  name="description"
                   onInit={(evt, editor) => editorRef.current = editor}
-                  initialValue={news.description}
+                  // initialValue="<p>This is the initial content of the editor.</p>"
                   init={{
                     height: 200,
                     menubar: false,
@@ -102,16 +139,16 @@ const EditNews = () => {
                   }}
                 />
                 {/* <textarea className="form-control form-control-lg bg-white bg-opacity-5" name='description' cols="10" rows="3"></textarea> */}
-          </div>
+              </div>
 
-          <div className="mt-4">
-            <button type="submit" className="btn btn-outline-theme btn-lg d-block w-100">Submit</button>
+              <div className="mt-4">
+                <button type="submit" className="btn btn-outline-theme btn-lg d-block w-100">Submit</button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
-    </div>
-      </div >
-    </div >) : <></>
+    </div>) : <></>
   )
 }
 

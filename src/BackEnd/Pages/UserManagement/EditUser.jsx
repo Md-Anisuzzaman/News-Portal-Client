@@ -13,7 +13,7 @@ const EditUser = () => {
     useEffect(() => {
         document.getElementById('editForm')?.reset();
         dispatch(asyncFetchUser(params.id));
-    },[])
+    }, [dispatch,params.id])
 
 
     const handleSubmit = (e) => {
@@ -26,6 +26,7 @@ const EditUser = () => {
     }
 
     const imageHandler = async (e) => {
+        e.preventDefault();
         let files = await e.target.files;
         let temp_images = []
         let index = 1;
@@ -63,7 +64,6 @@ const EditUser = () => {
                                     <label className="form-label">Password <span className="text-danger">*</span></label>
                                     <input type="password" name='password' defaultValue={user.password} className="form-control form-control-lg bg-white bg-opacity-5" />
                                 </div>
-
 
                                 <div className="row">
                                     <div className="mb-3 col-lg-6">

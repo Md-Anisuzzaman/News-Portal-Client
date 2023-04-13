@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../utils/axios";
 export const getAllNewsApi = async () => {
-    const res = await axiosInstance.get('/all-category', {
+    const res = await axiosInstance.get('/allnews', {
         headers: {
             authorization: 'Bearer ' + window.localStorage.getItem('token') //the token is a variable which holds the token
         }

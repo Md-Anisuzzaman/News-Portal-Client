@@ -1,11 +1,35 @@
 import React, { useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useDispatch } from 'react-redux';
-import { asyncCreateNews } from '../../../Features/News/asyncReducers/createNews';
 
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import { asyncCreateNews } from '../../../Features/News/asyncReducers/createNews';
+import { colourOptions } from './docs';
+
+const customStyles = {
+    control: (provided, state) => ({
+        ...provided,
+        borderRadius: '10px',
+        borderColor: state.isFocused ? '#00BFFF' : 'rgba(0, 0, 0, 0.3)',
+        boxShadow: state.isFocused ? '0 0 0 1px #00BFFF' : 'none',
+        '&:hover': {
+            borderColor: state.isFocused ? '#00BFFF' : 'rgba(0, 0, 0, 0.5)',
+        }
+    }),
+    option: (provided, state) => ({
+        ...provided,
+        backgroundColor: state.isSelected ? '#00BFFF' : 'white',
+        color: state.isSelected ? 'white' : 'black',
+        '&:hover': {
+            backgroundColor: state.isSelected ? '#00BFFF' : '#F5F5F5',
+        }
+    })
+};
 
 const CreateNews = () => {
     const [previewImage, setpreviewImage] = useState([]);
+    const animatedComponents = makeAnimated();
     const editorRef = useRef(null);
     const dispatch = useDispatch();
 
@@ -13,9 +37,7 @@ const CreateNews = () => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         formData.append('description', editorRef.current.getContent());
-        if (window.confirm('Are you sure you want create a news')) {
-            dispatch(asyncCreateNews(formData));
-        }
+        dispatch(asyncCreateNews(formData))
         e.currentTarget.reset();
         console.log(e.currentTarget);
         setpreviewImage('');
@@ -55,6 +77,19 @@ const CreateNews = () => {
                             </div>
 
                             <div className="mb-3 col-lg-12">
+                                <label className="form-label">Category<span className="text-danger">*</span></label>
+                                <Select
+                                    closeMenuOnSelect={false}
+                                    components={animatedComponents}
+                                    // defaultValue={[colourOptions[4], colourOptions[5]]}
+                                    isMulti
+                                    options={colourOptions}
+                                    styles={customStyles}
+                                    name="category"
+                                />
+                            </div>
+
+                            <div className="mb-3 col-lg-12">
                                 <label className="form-label">Image<span className="text-danger">*</span></label>
                                 <input onChange={imageHandler} accept="image/*" type="file" multiple name='image[]' className="form-control form-control-lg bg-white bg-opacity-5" />
                                 {previewImage}
@@ -63,7 +98,6 @@ const CreateNews = () => {
                             <div className="mb-3">
                                 <label className="form-label">Description<span className="text-danger">*</span></label>
                                 <Editor
-                                    name="description"
                                     onInit={(evt, editor) => editorRef.current = editor}
                                     // initialValue="<p>This is the initial content of the editor.</p>"
                                     init={{
@@ -81,7 +115,7 @@ const CreateNews = () => {
                                         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                                     }}
                                 />
-
+                                {/* <textarea className="form-control form-control-lg bg-white bg-opacity-5" name='description' cols="10" rows="3"></textarea> */}
                             </div>
 
                             <div className="mt-4">
