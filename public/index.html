@@ -16,12 +16,32 @@
   <link href="/css/vendor.min.css" rel="stylesheet" />
   <link href="/Assets/css/app.min.css" rel="stylesheet" />
   <link href="/Assets/css/coustom.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script src="https://cdn.tiny.cloud/1/to6d9zovl6uqygue7jty276z070c9web1u0ez8c2j4w6h1yc/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script src="https://cdn.tiny.cloud/1/to6d9zovl6uqygue7jty276z070c9web1u0ez8c2j4w6h1yc/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
   <script>
     tinymce.init({
       selector: '#mytextarea'
     });
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+
+    window.toast = function (title="successfully done",icon="success") {
+      Toast.fire({
+        icon,
+        title
+      })
+    }
   </script>
 
   <title>React Redux App</title>

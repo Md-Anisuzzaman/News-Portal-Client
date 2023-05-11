@@ -20,6 +20,8 @@ import Register from './FrontEnd/Auth/Register';
 import FrontEndIndex from './FrontEnd/FrontEndIndex';
 import FrontEndLayout from './FrontEnd/Layouts/FrontEndLayout';
 import { FrontEndAbout, FrontEndContact } from './FrontEnd/Pages/FrontEndPagesLists';
+import ResetPasswordForm from "./FrontEnd/Auth/ResetPasswordForm";
+import ResetVerifyEmail from "./FrontEnd/Auth/ResetVerifyEmail";
 
 function App() {
 
@@ -44,6 +46,8 @@ function App() {
           <Route index element={<FrontEndIndex />}></Route>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="resetpassword" element={<ResetVerifyEmail/>} />
+          <Route path="resetpasswordform" element={<ResetPasswordForm/>} />
           <Route path='about' element={<FrontEndAbout />}></Route>
           <Route path='contact' element={<FrontEndContact />}></Route>
         </Route>

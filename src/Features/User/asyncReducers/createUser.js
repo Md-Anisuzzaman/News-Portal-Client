@@ -31,7 +31,6 @@ const createUser = (builder) => {
         state.isLoading = false;
         state.isError = true;
         state.error = action.error?.message;
-
     });
 
 

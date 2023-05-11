@@ -43,7 +43,7 @@ const Login = () => {
                         <div class="mb-4">
                             <div class="d-flex">
                                 <label class="form-label">Password <span class="text-danger">*</span></label>
-                                <Link class="ms-auto text-white text-decoration-none text-opacity-50">Forgot password?</Link>
+                                <Link to='/resetpassword' class="ms-auto text-white text-decoration-none text-opacity-50">Forgot password?</Link>
                             </div>
                             <input type="password" name='password' class="form-control form-control-lg bg-white bg-opacity-5" placeholder="password" />
                             <ul className='text-danger m-2'>{formErrors.password}</ul>

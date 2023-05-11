@@ -22,7 +22,6 @@ const loginUser = (builder) => {
             state.authenticated = false;
         })
         .addCase(asyncLogin.fulfilled, (state, action) => {
-            console.log("all data", action.payload);
             try {
                 let token = action.payload.data.token;
                 let status = action.payload.status;
@@ -40,7 +39,6 @@ const loginUser = (builder) => {
         })
         .addCase(asyncLogin.rejected, (state, payload) => {
             state.loading = false;
-            console.log(payload);
             let temp = {
                 email: [],
                 password: []

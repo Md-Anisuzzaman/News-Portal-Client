@@ -114,31 +114,35 @@ const BackendSideBar = () => {
                                         <span className="menu-text">ALL News</span>
                                     </Link>
                                 </div>
-                                
+
                                 <div className="menu-item">
                                     <Link to="/dashboard/news/addnews" className="menu-link">
                                         <span className="menu-text">Create News</span>
                                     </Link>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="menu-item has-sub">
+                            <a href="#/" onClick={(e) => { toggle_list(e) }} className="menu-link">
+                                <span className="menu-icon">
+                                    <i className="fa fa-gear" />
+                                </span>
+                                <span className="menu-text">Category Management</span>
+                                <span className="menu-caret">
+                                    <b className="fa fa-angle-down" />
+                                </span>
+                            </a>
+                            <div className="menu-submenu">
+
                                 <div className="menu-item">
-                                    <Link to="/dashboard/news/editnews" className="menu-link">
-                                        <span className="menu-text">Edit News</span>
+                                    <Link to="/dashboard/category/allcategory" className="menu-link">
+                                        <span className="menu-text">All Category</span>
                                     </Link>
                                 </div>
                                 <div className="menu-item">
-                                    <a href="email_inbox.html" className="menu-link">
-                                        <span className="menu-text">News Category</span>
-                                    </a>
-                                </div>
-                                <div className="menu-item">
-                                    <a href="email_compose.html" className="menu-link">
-                                        <span className="menu-text">News Sub Category</span>
-                                    </a>
-                                </div>
-                                <div className="menu-item">
-                                    <a href="email_detail.html" className="menu-link">
-                                        <span className="menu-text">Brand</span>
-                                    </a>
+                                    <Link to="/dashboard/category/ceatecategory" className="menu-link">
+                                        <span className="menu-text">Create Category</span>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

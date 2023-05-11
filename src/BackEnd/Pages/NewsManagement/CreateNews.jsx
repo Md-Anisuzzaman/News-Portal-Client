@@ -1,13 +1,23 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { asyncCreateNews } from '../../../Features/News/asyncReducers/createNews';
+import { asyncFetchallCategory } from '../../../Features/News/asyncReducers/fetchAllCategory';
 
 
 const CreateNews = () => {
     const [previewImage, setpreviewImage] = useState([]);
     const editorRef = useRef(null);
     const dispatch = useDispatch();
+    const allcategory = useSelector((state) => state.newsStore.allCategory);
+
+
+    useEffect(() => {
+        dispatch(asyncFetchallCategory());
+        console.log({ allcategory });
+    }, [])
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,7 +27,6 @@ const CreateNews = () => {
             dispatch(asyncCreateNews(formData));
         }
         e.currentTarget.reset();
-        console.log(e.currentTarget);
         setpreviewImage('');
     }
 
@@ -59,7 +68,13 @@ const CreateNews = () => {
                                 <input onChange={imageHandler} accept="image/*" type="file" multiple name='image[]' className="form-control form-control-lg bg-white bg-opacity-5" />
                                 {previewImage}
                             </div>
-
+                            <select name="category[]" id="" multiple>
+                                {allcategory?.map(i => {
+                                    return (
+                                        <option value={i._id}>{i.title}</option>
+                                    )
+                                })}
+                            </select>
                             <div className="mb-3">
                                 <label className="form-label">Description<span className="text-danger">*</span></label>
                                 <Editor

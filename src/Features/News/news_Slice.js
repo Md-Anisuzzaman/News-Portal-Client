@@ -4,6 +4,7 @@ import deleteNews from './asyncReducers/deleteNews';
 import fetchAllNews from './asyncReducers/fetchAllNews';
 import updateNews from './asyncReducers/updateNews';
 import fetchNews from './asyncReducers/fetchNews';
+import fetchAllCategory from './asyncReducers/fetchAllCategory';
 
 const news_Slice = createSlice({
     name: 'news',
@@ -11,6 +12,7 @@ const news_Slice = createSlice({
         allNews: [],
         news: {},
         selectedNews: [],
+        allCategory:[],
         searchKey: '',
         paginate: 10,
         currentPage: 1,
@@ -21,6 +23,7 @@ const news_Slice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         fetchAllNews(builder)
+        fetchAllCategory(builder)
         createNews(builder)
         deleteNews(builder)
         updateNews(builder)
